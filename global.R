@@ -97,22 +97,18 @@ get_probs <- function(input) {
   return(p)
 }
 
-#sdf <- get_probs(x)
-# x <- iris %>% select(-Species)
-# x <- as.matrix(x)
-# x <- as.data.table(x)
-# x <- as.data.frame(x)
-# is.data.table(x)
-# x <- matrix(x)
-# as.matrix(x)
-# get_probs(x)
-# as.numberic(as.matrix(df_points[,1:4]))
-# sapply(df_points[,1:4], as.numeric)
-# get_probs(df_points[,1:4])
 
-#df_points <- data.frame('Sepal.Length' = numeric(), 'Sepal.Width' = numeric(), 'Petal.Length' = numeric(), 'Petal.Width' = numeric(), 'setosa_prob' = numeric(),'versicolor_prob' = numeric(),'virginica_prob' = numeric(), 'prediction' = character(), stringsAsFactors = FALSE)
 df_points <- data.frame('Sepal.Length' = numeric(), 'Sepal.Width' = numeric(), 'Petal.Length' = numeric(), 'Petal.Width' = numeric(),stringsAsFactors = FALSE)
+
+iris_long <- as.data.table(iris)
+iris_long$rowid <- seq(nrow(iris_long))
+iris_long[, Species := NULL]
+iris_long <- melt.data.table(data = iris_long, id.vars = 'rowid')
+
 get_max_row <- function(){
   nrow(df_points)
 }
+
+
+
 

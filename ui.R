@@ -79,7 +79,14 @@ body <- dashboardBody(
         )
       )
       , fluidRow(
-        plotOutput('irisgen', width = "700px", height = "600px")
+        column(
+          6
+          , plotOutput('irisgen', width = "600px", height = "400px")
+        )
+        , column(
+          6
+          , plotOutput('irisdens', width = "600px", height = "400px")
+        )
       )
       , hr()
       , fluidRow(
