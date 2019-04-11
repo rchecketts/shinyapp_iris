@@ -61,10 +61,16 @@ runIrismodel <- function() {
   xgb.save(model = IrisClassifier, fname = "inst/iris_xgboost_model")
 }
 
-if (exists('IrisClassifier')){
+
+if (exists('IrisClassifier')) {
   print("Model already loaded...")
-} else{
-  IrisClassifier <- runIrismodel()
+} else {
+  try(
+    IrisClassifier <- xgb.load(modelfile = "inst/iris_xgboost_model")
+  )
+  if (!exists('IrisClassifier')) {
+    IrisClassifier <- runIrismodel()
+  }
 }
 
 
@@ -108,7 +114,5 @@ iris_long <- melt.data.table(data = iris_long, id.vars = 'rowid')
 get_max_row <- function(){
   nrow(df_points)
 }
-
-
 
 
